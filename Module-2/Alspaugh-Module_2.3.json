@@ -1,0 +1,29 @@
+{
+    "User": "William",
+    "Birthdate": "12/03/1992",
+    "Roles": [
+        {
+        "Role": "Son"
+        },
+        {
+        "Role": "Husband"
+        },
+        {
+        "Role": "Pet Parent"
+        }
+    ],
+    "Dependents": [
+        {
+        "Name": "Bart"
+        },
+        {
+        "Name": "Smitty"
+        },
+        {
+        "Name": "Misty"
+        },
+        {
+        "Name": "Jolyne"
+        }
+    ]
+}
