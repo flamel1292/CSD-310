@@ -33,7 +33,7 @@ try:
 
      #Insert
      cursor.execute("""INSERT INTO film (film_director, film_name, film_releaseDate, film_runtime, genre_id, studio_id)
-                    VALUES('Gerad Johnstone', 'M3GAN', '2022', 102, 1, 2)""")
+                    VALUES('Gerard Johnstone', 'M3GAN', '2022', 102, 1, 2)""")
      
      show_films(cursor, "DISPLAYING FILMS AFTER INSERT")
 
