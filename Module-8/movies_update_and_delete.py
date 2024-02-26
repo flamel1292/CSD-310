@@ -24,7 +24,7 @@ def show_films(cursor, title):
 try:
      db = mysql.connector.connect(**config)
      
-     print("\n Database user {} connected to MySQL on host with database {}".format(config["user"], config["host"], config["database"]))
+     print("\n Database user {} connected to MySQL on host {} with database {}".format(config["user"], config["host"], config["database"]))
 
      cursor = db.cursor()
 
