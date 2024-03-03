@@ -146,39 +146,39 @@ def create_tables(config):
                VALUES
                ('sale', 1, 3, 1, 1, '2023-05-12'),
                ('sale', 2, 2, 2, 2, '2023-07-24'),
-               ('rental', 3, 1, 3, 3, '2020-06-03'),
+               ('rental', 3, 1, 3, 3, '2021-06-03'),
                ('sale', 1, 4, 4, 4, '2022-04-28'),
                ('rental', 2, 2, 2, 5, '2022-09-27'),
                ('sale', 3, 3, 3, 6, '2021-05-18'),
-               ('rental', 1, 3, 2, 4, '2020-07-15'),
-               ('sale', 3, 1, 1, 3, '2018-05-20'),
-               ('sale', 2, 2, 4, 2, '2019-12-10'),
+               ('rental', 1, 3, 2, 4, '2023-07-15'),
+               ('sale', 3, 1, 1, 3, '2022-05-20'),
+               ('sale', 2, 2, 4, 2, '2021-12-10'),
                ('rental', 5, 4, 3, 5, '2022-03-05'),
-               ('sale', 4, 1, 5, 1, '2017-09-28'),
+               ('sale', 4, 1, 5, 1, '2023-09-28'),
                ('sale', 6, 2, 2, 4, '2023-08-18'),
-               ('sale', 1, 1, 1, 3, '2018-11-02'),
+               ('sale', 1, 1, 1, 3, '2023-11-02'),
                ('rental', 3, 3, 4, 2, '2021-06-14'),
-               ('sale', 6, 1, 3, 5, '2019-04-25'),
-               ('rental', 2, 5, 5, 1, '2024-01-30'),
+               ('sale', 6, 1, 3, 5, '2021-04-25'),
+               ('rental', 2, 5, 5, 1, '2021-01-30'),
                ('rental', 1, 2, 3, 1, '2021-05-10'),
-               ('sale', 4, 1, 2, 2, '2019-08-23'),
-               ('rental', 7, 3, 5, 3, '2018-11-15'),
+               ('sale', 4, 1, 2, 2, '2022-08-23'),
+               ('rental', 7, 3, 5, 3, '2022-11-15'),
                ('sale', 2, 1, 4, 4, '2022-02-08'),
-               ('rental', 5, 2, 1, 5, '2017-07-30'),
-               ('rental', 3, 1, 2, 1, '2020-09-12'),
+               ('rental', 5, 2, 1, 5, '2023-07-30'),
+               ('rental', 3, 1, 2, 1, '2021-09-12'),
                ('sale', 6, 1, 3, 4, '2023-04-18'),
-               ('rental', 1, 2, 5, 2, '2019-12-05'),
-               ('sale', 7, 1, 4, 5, '2024-01-22'),
+               ('rental', 1, 2, 5, 2, '2022-12-05'),
+               ('sale', 7, 1, 4, 5, '2022-01-22'),
                ('rental', 4, 3, 1, 3, '2022-11-03'),
                ('rental', 3, 5, 2, 4, '2022-08-15'),
-               ('sale', 6, 2, 1, 3, '2019-05-20'),
-               ('rental', 2, 3, 5, 6, '2018-11-10'),
+               ('sale', 6, 2, 1, 3, '2021-05-20'),
+               ('rental', 2, 3, 5, 6, '2021-11-10'),
                ('sale', 4, 1, 3, 2, '2023-03-25'),
-               ('rental', 7, 4, 4, 1, '2020-09-03'),
-               ('rental', 1, 2, 2, 5, '2017-12-12'),
-               ('sale', 5, 3, 1, 6, '2024-01-08'),
-               ('rental', 3, 2, 5, 4, '2018-06-17'),
-               ('sale', 7, 1, 4, 3, '2021-07-22'),
+               ('rental', 7, 4, 4, 1, '2022-09-03'),
+               ('rental', 1, 2, 2, 5, '2021-12-12'),
+               ('sale', 5, 3, 1, 6, '2022-01-08'),
+               ('rental', 3, 2, 5, 4, '2023-06-17'),
+               ('sale', 7, 1, 4, 3, '2022-07-22'),
                ('sale', 2, 4, 3, 2, '2022-04-05');""",
             """INSERT Locations(LocationID, Location)
                VALUES
@@ -188,14 +188,52 @@ def create_tables(config):
                (4, 'Spain'),
                (5, 'Nepal'),
                (6, 'Vietnam');""",
-            """INSERT Trips(TripID, CustomerID, EmployeeID, LocationID, Price, TripDate)
+            """INSERT Trips(CustomerID, EmployeeID, LocationID, Price, TripDate)
                VALUES
-               (1, 3, 3, 6, 1623.93, '2024-03-04'),
-               (2, 5, 4, 1, 2027.34, '2024-10-28'),
-               (3, 1, 4, 3, 1051.24, '2024-04-22'),
-               (4, 2, 3, 3, 2424.86, '2024-12-24'),
-               (5, 6, 3, 5, 1709.65, '2024-06-23'),
-               (6, 4, 4, 2, 1815.34, '2024-08-06');"""
+               (3, 3, 6, 1623.93, '2021-03-04'),
+               (5, 4, 1, 2027.34, '2022-10-28'),
+               (1, 4, 3, 1051.24, '2023-04-22'),
+               (2, 3, 3, 2424.86, '2021-12-24'),
+               (6, 3, 5, 1709.65, '2022-06-23'),
+               (4, 4, 2, 1815.34, '2023-08-06'),
+               (3, 3, 6, 1623.93, '2023-03-04'),
+               (5, 4, 1, 2027.34, '2021-10-28'),
+               (1, 4, 3, 1051.24, '2023-04-22'),
+               (2, 3, 3, 2424.86, '2022-12-24'),
+               (6, 3, 5, 1709.65, '2021-06-23'),
+               (4, 4, 2, 1815.34, '2023-08-06'),
+               (3, 3, 6, 1623.93, '2021-03-04'),
+               (5, 4, 1, 2027.34, '2022-10-28'),
+               (1, 4, 3, 1051.24, '2023-04-22'),
+               (2, 3, 3, 2424.86, '2021-12-24'),
+               (6, 3, 5, 1709.65, '2022-06-23'),
+               (4, 4, 2, 1815.34, '2023-08-06'),
+               (3, 3, 6, 1623.93, '2023-03-04'),
+               (5, 4, 1, 2027.34, '2021-10-28'),
+               (1, 4, 3, 1051.24, '2023-04-22'),
+               (2, 3, 3, 2424.86, '2022-12-24'),
+               (6, 3, 5, 1709.65, '2021-06-23'),
+               (4, 4, 2, 1815.34, '2023-08-06'),
+               (1, 1, 1, 1000.00, '2021-05-10'),
+               (2, 2, 2, 1200.50, '2021-07-15'),
+               (3, 3, 3, 800.75, '2021-09-20'),
+               (4, 4, 4, 1500.25, '2022-02-28'),
+               (5, 5, 5, 2000.00, '2022-04-10'),
+               (6, 6, 6, 1800.50, '2022-06-15'),
+               (1, 1, 1, 900.75, '2022-08-20'),
+               (2, 2, 2, 1100.25, '2022-10-28'),
+               (3, 3, 3, 1300.50, '2023-01-05'),
+               (4, 4, 4, 1700.25, '2023-03-10'),
+               (5, 5, 5, 1900.75, '2023-05-15'),
+               (6, 6, 6, 2100.50, '2023-07-20'),
+               (1, 1, 1, 950.75, '2023-09-25'),
+               (2, 2, 2, 1150.25, '2023-11-01'),
+               (3, 3, 3, 1350.50, '2023-12-15'),
+               (4, 4, 4, 1600.25, '2021-01-20'),
+               (5, 5, 5, 1800.75, '2021-03-28'),
+               (6, 6, 6, 2000.50, '2021-06-05'),
+               (1, 1, 1, 1000.75, '2021-08-10'),
+               (2, 2, 2, 1200.25, '2021-10-15');"""
         ]
 
         #Executing both the CREATE & INSERT statements
@@ -288,7 +326,7 @@ def display_reports(config):
         cursor = db.cursor()
 
         #Asks for specific year to search through records
-        year = input("\nPlease enter the year you would like to search sales and rental data: ")
+        year = int(input("\nPlease enter the year you would like to search sales and rental data: "))
 
         #Question: Do enough customers buy equipment to keep equipment sales?
         cursor.execute(f"""SELECT
@@ -299,10 +337,10 @@ def display_reports(config):
                               SUM(CASE WHEN s.Category = 'sale' THEN s.Price ELSE 0 END) AS TotalSalesAmount,
                               SUM(CASE WHEN s.Category = 'rental' THEN s.Quantity ELSE 0 END) AS TotalRentalsQuantity,
                               SUM(CASE WHEN s.Category = 'rental' THEN s.Price ELSE 0 END) AS TotalRentalsAmount
-                          FROM Inventory i
-                          LEFT JOIN EquipmentSales s 
-                          ON i.ItemID = s.ItemID AND YEAR(s.TransactionDate) = {year}
-                          GROUP BY i.ItemID, i.Description, SalesYear;""")
+                           FROM Inventory i
+                           LEFT JOIN EquipmentSales s 
+                           ON i.ItemID = s.ItemID AND YEAR(s.TransactionDate) = {year}
+                           GROUP BY i.ItemID, i.Description, SalesYear;""")
         
         print(f"\n--DISPLAYING SALES AND RENTAL DATA FOR THE YEAR {year}--")
         for record in cursor:
@@ -311,16 +349,27 @@ def display_reports(config):
         completion_time(cursor)
 
         #Question: Is there anyone of those locations that has a downward trend in bookings?
-        cursor.execute("""SELECT Locations.Location, COUNT(Trips.LocationID), YEAR(TripDate)
-                          FROM Trips
-                          LEFT JOIN Locations
-                          ON Trips.LocationID = Locations.LocationID
-                          GROUP BY Trips.LocationID, YEAR(TripDate);""")
+        year = int(input("\nPlease enter the year you would like to search for trends: "))
+
+        cursor.execute(f"""SELECT
+                              l.LocationID,
+                              l.Location,
+                              COUNT(CASE WHEN YEAR(t.TripDate) = {year - 1} THEN t.TripID END),
+                              COUNT(CASE WHEN YEAR(t.TripDate) = {year} THEN t.TripID END),
+                              CASE
+                                  WHEN COUNT(CASE WHEN YEAR(t.TripDate) = {year} THEN t.TripID END) > COUNT(CASE WHEN YEAR(t.TripDate) = {year - 1} THEN t.TripID END) THEN 'Rise'
+                                  WHEN COUNT(CASE WHEN YEAR(t.TripDate) = {year} THEN t.TripID END) < COUNT(CASE WHEN YEAR(t.TripDate) = {year - 1} THEN t.TripID END) THEN 'Fall'
+                                  ELSE 'No Change'
+                              END
+                          FROM Locations l
+                          LEFT JOIN Trips t
+                          ON l.LocationID = t.LocationID
+                          GROUP BY l.LocationID, l.Location;""")
         
-        print("\n--DISPLAYING AMOUNT OF TRIPS TAKEN TO A LOCATION--")
+        print("\n--DISPLAYING TRENDS FOR TRIPS TAKEN TO LOCATIONS--")
         for record in cursor:
-            print("\nLocation: {} | Total Trips: {} | Year: {}".format(record[0], record[1], record[2]))
-        
+            print(f"\nLocation ID: {record[0]} | Location: {record[1]} | Trips in {year - 1}: {record[2]} | Trips in {year}: {record[3]} | Trend: {record[4]}")
+               
         completion_time(cursor)
 
         #Question: Are there inventory items that are over five years old?
