@@ -19,8 +19,10 @@ def create_database(config):
 
         if database_exists:
             cursor.execute("DROP DATABASE OutlandAdventures;") #Deletes database if it exists
+            print("\nDatabase 'OutlandAdventures' Deleted")
         
         cursor.execute("CREATE DATABASE OutlandAdventures;") #Creates new database named OutlandAdventures
+        print("\nNew Database 'OutlandAdventures' Created")
         
         #Displays existing databases
         cursor.execute("SHOW DATABASES;")
@@ -80,10 +82,10 @@ def create_tables(config):
                Quantity int,
                Price decimal(30, 2) DEFAULT 0.00,
                EmployeeID int,
-               CustomerID int,
+               CustomerID int NOT NULL,
                TransactionDate date DEFAULT (CURRENT_DATE),
                CHECK(Category IN('rental', 'sale')),
-               PRIMARY KEY(TransactionID, ItemID, EmployeeID, CustomerID),
+               PRIMARY KEY(TransactionID, Category, ItemID),
                FOREIGN KEY(ItemID) REFERENCES Inventory(ItemID),
                FOREIGN KEY(EmployeeID) REFERENCES Employees(EmployeeID),
                FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID));""",
@@ -96,7 +98,7 @@ def create_tables(config):
                CustomerID int NOT NULL,
                EmployeeID int NOT NULL,
                LocationID int NOT NULL,
-               Price double,
+               Price decimal(30, 2),
                TripDate date DEFAULT (CURRENT_DATE),
                PRIMARY KEY(TripID),
                FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID),
@@ -239,16 +241,18 @@ def create_tables(config):
         #Executing both the CREATE & INSERT statements
         for table in tables:
             cursor.execute(table)
+        print("\nTables Created")
         
         for query in insert:
             cursor.execute(query)
-        
+        print("\nTables Populated")
+
         db.commit()
 
         #Display existing tables
         cursor.execute("SHOW TABLES;")
 
-        print("\n--TABLE LIST IN OutlandAdventures--")
+        print("\n--TABLES IN OutlandAdventures--")
         for tablename in cursor:
             print(tablename[0])
         
@@ -256,49 +260,61 @@ def create_tables(config):
         cursor.execute("""SELECT *
                        FROM EMPLOYEES""")
         
-        print("\n--DISPLAYING EMPLOYEES--")
+        print("\n--DISPLAYING Employees--")
+        print("{:<12}|{:>15}|{:>15}|{:>15}".format("Employee ID", "First Name", "Last Name", "Job Title"))
+        print("-" * 60)
         for employee in cursor:
-            print("\nEmployee ID: {} | First Name: {} | Last Name: {} | Job Title: {}".format(employee[0], employee[1], employee[2], employee[3]))
+            print("{:<12}|{:>15}|{:>15}|{:>15}".format(employee[0], employee[1], employee[2], employee[3]))
         
         #Display Customers table
         cursor.execute("""SELECT *
                        FROM Customers""")
         
-        print("\n--DISPLAYING Customer--")
+        print("\n--DISPLAYING Customers--")
+        print("{:<12}|{:>15}|{:>15}|{:>15}|{:>15}".format("Customer ID", "First Name", "Last Name", "Inoculated", "Travel Visa"))
+        print("-" * 76)
         for customer in cursor:
-            print("\nCustomer ID: {} | First Name: {} | Last Name: {} | Inoculated: {} | Travel Visa: {}".format(customer[0], customer[1], customer[2], customer[3], customer[4]))
+            print("{:<12}|{:>15}|{:>15}|{:>15}|{:>15}".format(customer[0], customer[1], customer[2], customer[3], customer[4]))
 
         #Display Inventory table
         cursor.execute("""SELECT *
                        FROM Inventory""")
         
         print("\n--DISPLAYING Inventory--")
+        print("{:<8}|{:>15}|{:>15}|{:>15}|{:>10}|{:>15}".format("Item ID", "Description", "Unit Price", "Rental Price", "Quantity", "Intake Date"))
+        print("-" * 83)
         for inventory in cursor:
-            print("\nItem ID: {} | Description: {} | Unit Price: {} | Rental Price: {} | Quantity: {} | Intake Date: {}".format(inventory[0], inventory[1], inventory[2], inventory[3], inventory[4], inventory[5]))
+            print("{:<8}|{:>15}|{:>15}|{:>15}|{:>10}|{:>15}".format(inventory[0], inventory[1], inventory[2], inventory[3], inventory[4], str(inventory[5])))
 
         #Display EquipmentSales table
         cursor.execute("""SELECT *
                        FROM EquipmentSales""")
         
         print("\n--DISPLAYING EquipmentSales--")
+        print("{:<15}|{:>10}|{:>10}|{:>10}|{:>10}|{:>12}|{:>12}|{:>20}".format("Transaction ID", "Category", "Item ID", "Quantity", "Price", "Employee ID", "Customer ID", "Transaction Date"))
+        print("-" * 106)
         for sale in cursor:
-            print("\nTransaction ID: {} | Category: {} | Item ID: {} | Quantity: {} | Price: {} | Employee ID: {} | Customer ID: {} | Transaction Date: {}".format(sale[0], sale[1], sale[2], sale[3], sale[4], sale[5], sale[6], sale[7]))
+            print("{:<15}|{:>10}|{:>10}|{:>10}|{:>10}|{:>12}|{:>12}|{:>20}".format(sale[0], sale[1], sale[2], sale[3], sale[4], sale[5], sale[6], str(sale[7])))
 
         #Display Locations table
         cursor.execute("""SELECT *
                        FROM Locations""")
         
         print("\n--DISPLAYING Locations--")
+        print("{:<12}|{:>15}".format("Location ID", "Location"))
+        print("-" * 28)
         for location in cursor:
-            print("\nLocation ID: {} | Location: {}".format(location[0], location[1]))
+            print("{:<12}|{:>15}".format(location[0], location[1]))
 
         #Display Trips table
         cursor.execute("""SELECT *
                        FROM Trips""")
         
         print("\n--DISPLAYING Trips--")
+        print("{:<8}|{:>12}|{:>12}|{:>12}|{:>10}|{:>15}".format("Trip ID", "Customer ID", "Employee ID", "Location ID", "Price", "Trip Date"))
+        print("-" * 74)
         for trip in cursor:
-            print("\nTrip ID: {} | Customer ID: {} | Employee ID: {} | Location ID: {} | Price: {} | Trip Date: {}".format(trip[0], trip[1], trip[2], trip[3], trip[4], trip[5]))
+            print("{:<8}|{:>12}|{:>12}|{:>12}|{:>10}|{:>15}".format(trip[0], trip[1], trip[2], trip[3], trip[4], str(trip[5])))
 
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -333,18 +349,20 @@ def display_reports(config):
                               i.ItemID,
                               i.Description,
                               COALESCE(YEAR(s.TransactionDate), {year}) AS SalesYear,
-                              SUM(CASE WHEN s.Category = 'sale' THEN s.Quantity ELSE 0 END) AS TotalSalesQuantity,
-                              SUM(CASE WHEN s.Category = 'sale' THEN s.Price ELSE 0 END) AS TotalSalesAmount,
-                              SUM(CASE WHEN s.Category = 'rental' THEN s.Quantity ELSE 0 END) AS TotalRentalsQuantity,
-                              SUM(CASE WHEN s.Category = 'rental' THEN s.Price ELSE 0 END) AS TotalRentalsAmount
+                              SUM(CASE WHEN s.Category = 'sale' THEN s.Quantity ELSE 0 END),
+                              SUM(CASE WHEN s.Category = 'sale' THEN s.Price ELSE 0 END) ,
+                              SUM(CASE WHEN s.Category = 'rental' THEN s.Quantity ELSE 0 END),
+                              SUM(CASE WHEN s.Category = 'rental' THEN s.Price ELSE 0 END)
                            FROM Inventory i
                            LEFT JOIN EquipmentSales s 
                            ON i.ItemID = s.ItemID AND YEAR(s.TransactionDate) = {year}
                            GROUP BY i.ItemID, i.Description, SalesYear;""")
         
         print(f"\n--DISPLAYING SALES AND RENTAL DATA FOR THE YEAR {year}--")
+        print("{:<10}|{:<15}|{:>10}|{:>15}|{:>20}|{:>15}|{:>20}".format("Item ID", "Description", "Sales Year", "Total Sales", "Total Sales Revenue", "Total Rentals", "Total Rental Revenue"))
+        print("-" * 111)
         for record in cursor:
-            print("\nItem ID: {} | Description: {} | Sales Year: {} | Total Sales: {} | Total Sales Revenue: {} | Total Rentals: {} | Total Rental Revenue: {}".format(record[0], record[1], record[2], record[3], record[4], record[5], record[6]))
+            print("{:<10}|{:<15}|{:>10}|{:>15}|{:>20}|{:>15}|{:>20}".format(record[0], record[1], record[2], record[3], record[4], record[5], record[6]))
 
         completion_time(cursor)
 
@@ -367,8 +385,10 @@ def display_reports(config):
                           GROUP BY l.LocationID, l.Location;""")
         
         print("\n--DISPLAYING TRENDS FOR TRIPS TAKEN TO LOCATIONS--")
+        print("{:<15}|{:<15}|{:>15}|{:>15}|{:>10}".format("Location ID", "Location", f"Trips in {year - 1}", f"Trips in {year}", "Trend"))
+        print("-" * 74)
         for record in cursor:
-            print(f"\nLocation ID: {record[0]} | Location: {record[1]} | Trips in {year - 1}: {record[2]} | Trips in {year}: {record[3]} | Trend: {record[4]}")
+            print("{:<15}|{:<15}|{:>15}|{:>15}|{:>10}".format(record[0], record[1], record[2], record[3], record[4]))
                
         completion_time(cursor)
 
@@ -378,8 +398,10 @@ def display_reports(config):
                           WHERE DATEDIFF(CURDATE(), IntakeDate)/365 >= 5;""")
         
         print("\n--DISPLAYING INVENTORY ITEMS 5+ YEARS OLD--")
+        print("{:<10}|{:<15}|{:>16}".format("Item ID", "Description", "Item Age (Years)"))
+        print("-" * 43)
         for record in cursor:
-            print("\nItem ID: {} | Description: {} | Item Age: {}".format(record[0], record[1], record[2]))
+            print("{:<10}|{:<15}|{:>16}".format(record[0], record[1], record[2]))
         
         completion_time(cursor)
 
